@@ -2,6 +2,7 @@ backend:
   name: github
   repo: christykelly/advanced-arborist
   branch: main
+  base_url: https://christy-websites-production.up.railway.app
 
 media_folder: "images"
 public_folder: "/images"
