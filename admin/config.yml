@@ -1,0 +1,69 @@
+backend:
+  name: github
+  repo: christykelly/advanced-arborist
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "_data/settings.yml"
+        fields:
+          - { label: "Phone", name: "phone", widget: "string", default: "1-989-486-1924" }
+          - { label: "Email", name: "email", widget: "string", default: "hello@wearetreepeople.com" }
+          - { label: "Address", name: "address", widget: "text", default: "1543 East Ednor Court, Midland, MI" }
+          - { label: "Service Area", name: "service_area", widget: "text", hint: "Describe your service area", required: false }
+          - { label: "Facebook URL", name: "facebook_url", widget: "string", required: false }
+          - { label: "Instagram URL", name: "instagram_url", widget: "string", required: false }
+
+  - name: "hours"
+    label: "Hours/Availability"
+    files:
+      - name: "availability"
+        label: "Availability"
+        file: "_data/hours.yml"
+        fields:
+          - { label: "Availability Text", name: "availability_text", widget: "string", default: "We are always open by appointment!" }
+          - { label: "By Appointment", name: "by_appointment", widget: "boolean", default: true }
+          - { label: "Seasonal Notes", name: "seasonal_notes", widget: "text", hint: "Any seasonal availability notes", required: false }
+
+  - name: "services"
+    label: "Services"
+    files:
+      - name: "services"
+        label: "Services"
+        file: "_data/services.yml"
+        fields:
+          - label: "Services"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - name: "hero"
+        label: "Hero"
+        file: "_data/hero.yml"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string", default: "Healthy Trees Start Here!" }
+          - { label: "Subheadline", name: "subheadline", widget: "string", default: "Professional and Dedicated Arborist Services" }
+          - { label: "CTA Text", name: "cta_text", widget: "string", default: "Get Started" }
+
+  - name: "about"
+    label: "About / Our Story"
+    files:
+      - name: "about"
+        label: "About"
+        file: "_data/about.yml"
+        fields:
+          - { label: "Tagline", name: "tagline", widget: "string", default: "Trees carry a legacy, lets conserve it!" }
+          - { label: "Body", name: "body", widget: "markdown" }

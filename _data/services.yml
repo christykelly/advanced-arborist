@@ -1,0 +1,10 @@
+services:
+  - name: "Plant Health Care / IPM"
+    description: "We offer plant health care services! Are your trees looking a little sickly, or maybe they're under attack by a pest? We can create an integrated pest management plan (IPM) utilizing non-chemical and chemical treatment methods. We focus on the environment and conservation, we will only recommend chemical treatment if absolutely necessary!"
+    image: "/images/service-ipm.jpg"
+  - name: "ISA Arborist Consultations"
+    description: "Do you need a consultation? We have an ISA certified arborist on staff! We can answer any questions you may have about the trees on your property."
+    image: "/images/service-consultation.jpg"
+  - name: "Pruning and Stump Grinding"
+    description: "Do you have trees that need trimming or an unsightly stump? We offer pruning and stump grinding services! If you don't want to trust any old 'tree guy' with the aesthetic of your landscape give us a call. We can give you a free estimate, and if your project is outside of our scope we will advise you on what to look for in an alternative contractor."
+    image: "/images/service-pruning.jpg"
