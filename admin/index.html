@@ -5,8 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Content Manager - Advanced Arborist LLC</title>
+  <style>
+    .live-site-link {
+      position: fixed; top: 14px; right: 14px; z-index: 10000;
+      background: #166534; color: #fff; padding: 8px 14px; border-radius: 6px;
+      font-family: -apple-system, system-ui, sans-serif; font-size: 13px;
+      font-weight: 600; text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .live-site-link:hover { background: #14532d; }
+  </style>
 </head>
 <body>
+  <a href="https://christykelly.github.io/advanced-arborist/" target="_blank" rel="noopener" class="live-site-link">View Live Site &rarr;</a>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    CMS.registerPreviewStyle("https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css");
+    CMS.registerPreviewStyle(`
+      body { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; margin: 0; background: #f7fee7; color: #1f2937; }
+      .pw { max-width: 900px; margin: 0 auto; padding: 28px 20px; }
+      h1, h2, h3 { color: #166534; }
+      .prose p { margin: 0 0 1em; line-height: 1.65; }
+      .prose h2 { font-size: 1.5rem; margin-top: 1.4em; }
+      .prose ul { padding-left: 1.4em; list-style: disc; }
+    `, { raw: true });
+
+    const h = window.h;
+
+    CMS.registerPreviewTemplate("hero", ({ entry }) => {
+      const d = entry.get("data").toJS();
+      return h("div", { className: "pw" }, [
+        h("div", { className: "bg-green-700 text-white rounded-lg p-10 text-center", key: "hero" }, [
+          h("h1", { className: "text-4xl md:text-5xl font-bold mb-3 text-white", key: "h" }, d.headline || ""),
+          h("p", { className: "text-xl mb-6 text-green-100", key: "s" }, d.subheadline || ""),
+          d.cta_text ? h("button", { className: "bg-white text-green-700 px-6 py-3 rounded-lg font-semibold", key: "c" }, d.cta_text) : null,
+        ])
+      ]);
+    });
+
+    CMS.registerPreviewTemplate("services", ({ entry, getAsset }) => {
+      const list = entry.getIn(["data", "services"]);
+      const services = list ? list.toJS() : [];
+      return h("div", { className: "pw" }, [
+        h("h1", { className: "text-3xl font-bold mb-6", key: "t" }, "Services"),
+        h("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", key: "g" },
+          services.map((s, i) =>
+            h("div", { className: "bg-white rounded-lg shadow overflow-hidden", key: i }, [
+              s.image ? h("img", { src: String(getAsset(s.image)), className: "w-full h-48 object-cover", key: "i" }) : null,
+              h("div", { className: "p-5", key: "p" }, [
+                h("h3", { className: "text-xl font-semibold mb-2", key: "n" }, s.name || ""),
+                h("p", { className: "text-sm text-gray-700", key: "d" }, s.description || ""),
+              ])
+            ])
+          )
+        )
+      ]);
+    });
+
+    CMS.registerPreviewTemplate("about", ({ entry, widgetFor }) => {
+      const tag = entry.getIn(["data", "tagline"]);
+      return h("div", { className: "pw" }, [
+        h("h1", { className: "text-3xl font-bold mb-3", key: "t" }, "About"),
+        tag ? h("p", { className: "text-lg italic text-green-700 mb-6", key: "tg" }, tag) : null,
+        h("div", { className: "prose", key: "b" }, widgetFor("body")),
+      ]);
+    });
+
+    CMS.registerPreviewTemplate("settings", ({ entry }) => {
+      const d = entry.get("data").toJS();
+      return h("div", { className: "pw" }, [
+        h("h2", { className: "text-2xl font-bold mb-4", key: "t" }, "Contact Information"),
+        h("div", { className: "bg-white rounded-lg shadow p-5 space-y-2 text-sm", key: "i" }, [
+          d.phone ? h("div", { key: "p" }, ["Phone: ", d.phone]) : null,
+          d.email ? h("div", { key: "e" }, ["Email: ", d.email]) : null,
+          d.address ? h("div", { key: "a" }, ["Address: ", d.address]) : null,
+          d.service_area ? h("div", { className: "mt-3 italic text-gray-700", key: "sa" }, ["Service area: ", d.service_area]) : null,
+          d.facebook_url ? h("div", { key: "fb" }, ["Facebook: ", d.facebook_url]) : null,
+          d.instagram_url ? h("div", { key: "ig" }, ["Instagram: ", d.instagram_url]) : null,
+        ])
+      ]);
+    });
+
+    CMS.registerPreviewTemplate("hours", ({ entry }) => {
+      const d = entry.get("data").toJS();
+      return h("div", { className: "pw" }, [
+        h("h2", { className: "text-2xl font-bold mb-4", key: "t" }, "Availability"),
+        h("p", { className: "text-lg mb-3", key: "a" }, d.availability_text || ""),
+        d.by_appointment ? h("p", { className: "italic text-green-700 mb-3", key: "ba" }, "By Appointment") : null,
+        d.seasonal_notes ? h("div", { className: "bg-white rounded-lg shadow p-4 text-sm", key: "sn" }, d.seasonal_notes) : null,
+      ]);
+    });
+  </script>
 </body>
 </html>
